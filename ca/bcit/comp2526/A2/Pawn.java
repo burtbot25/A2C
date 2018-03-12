@@ -27,7 +27,7 @@ public class Pawn extends ChessPiece {
     /**
      * Has moved.
      */
-    private boolean moved = true;
+    private boolean notMoved = true;
     
     /**
      * Constructs an object of type Pawn.
@@ -77,17 +77,20 @@ public class Pawn extends ChessPiece {
     @Override
     boolean validMove(Square[][] squareArray, int fromX, int fromY,
             int toX, int toY) {
-        if (
-                (toX == fromX || toX == (fromX + 8) || toX == (fromX - 8)) 
-                
+        if ((toX == fromX || toX == (fromX + 8) || toX == (fromX - 8) || toX == (fromX + 16) || toX == (fromX - 16)) 
                 && colourValid(fromY, toY)) {
+            
             if (Math.abs(fromY - toY) > 2) {
                 return false;
-            } else if (!moved && Math.abs(fromY - toY) == 2) {
+            } else if (!notMoved && Math.abs(fromY - toY) == 2) {
                 return false;
-            }    
-            moved = false;
+            }
+            if ((toX == (fromX + 16) || toX == (fromX - 16)) && Math.abs(fromY - toY) == 1) {
+                return false;
+            }
+            notMoved = false;
             return true;
+            
         }
         return false;
     }

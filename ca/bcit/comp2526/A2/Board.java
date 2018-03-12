@@ -206,7 +206,7 @@ public class Board extends GridPane implements Move, Serializable {
      */
     public boolean move(MouseEvent click) {
         getDestinationInfo(click);
-        if (active && turnCheck() && isValid(click)) {
+        if (active && /*turnCheck() &&*/ isValid(click)) {
             setDestination();
             if (turn.equals("white")) {
                 turn = "black";
@@ -246,10 +246,8 @@ public class Board extends GridPane implements Move, Serializable {
         //Update's piece's internal x and y coordinates
         pieceNode.setxCor(destCol);
         pieceNode.setyCor(destRow);
-        pieceNode.setzCor(level);
+        pieceNode.setzCor(destLevel);
         active = !(active);
-        
-        System.out.println(level + 1);
     }
     
     /**
@@ -262,13 +260,13 @@ public class Board extends GridPane implements Move, Serializable {
             destSquare = (Square) click.getSource();
             destCol = GridPane.getColumnIndex(destSquare);
             destRow = GridPane.getRowIndex(destSquare);
-            destLevel = getLevel();
+            destLevel = destSquare.getzCor();
             System.out.println("Level " + (destLevel+1) + ": " + destCol + " " + destRow + " " + destSquare);
         } else {
             destPiece = (ChessPiece) click.getSource();
             destCol = GridPane.getColumnIndex(destPiece);
             destRow = GridPane.getRowIndex(destPiece);
-            destLevel = getLevel();
+            destLevel = destPiece.getzCor();
             System.out.println("Level " + (destLevel+1) + ": " + destCol + " " + destRow + " " + destPiece);
         }
     }
@@ -281,7 +279,7 @@ public class Board extends GridPane implements Move, Serializable {
     private void getPieceInfo(MouseEvent click) {
         pieceNode = (ChessPiece) click.getSource();
         if (active) {
-            System.out.println("Level " + (level+1) + ": " + pieceNode.getxCor() + " " + pieceNode.getyCor()
+            System.out.println("Level " + (pieceNode.getzCor()) + ": " + pieceNode.getxCor() + " " + pieceNode.getyCor()
                     + " " + pieceNode + " selected");
         }
     }

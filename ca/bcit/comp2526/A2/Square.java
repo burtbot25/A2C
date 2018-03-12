@@ -140,7 +140,7 @@ public class Square extends Rectangle {
      */
     @Override
     public String toString() {
-        return colour + " Square" + "(" + getzCor() + ")";
+        return colour + " Square" + "(" + (getzCor() + 1) + ")";
     }
     
     /**

@@ -12,6 +12,8 @@ public class Board3D extends Board {
     
     public void newGame() {
         setSquares(24, 8);
+        //note, makePawns not called at the moment.
+        // turnCheck in getDestination info is off
         setWhitePieces();
         setBlackPieces();
         System.out.println("Started New Game");
@@ -27,15 +29,15 @@ public class Board3D extends Board {
             for (int y = 0; y < cols; y++) {
                 // Determines colour of square
                 if (x >= 0 && x <= 7) {
-                    level = 1;
+                    level = 0;
                     squareColour = ((x + y) % 2 == 0) ? "grey" : "light grey";
                     squareArray[x][y] = new Square(squareColour, x, y, level);
                 } else if (x >= 8 && x <= 15) {
-                    level = 2;
+                    level = 1;
                     squareColour = ((x + y) % 2 == 0) ? "blue" : "royalblue";
                     squareArray[x][y] = new Square(squareColour, x, y, level);
                 } else {
-                    level = 3;
+                    level = 2;
                     squareColour = ((x + y) % 2 == 0) ? "grey" : "light grey";
                     squareArray[x][y] = new Square(squareColour, x, y, level);
                 }

@@ -193,17 +193,45 @@ abstract class ChessPiece extends Text implements Serializable {
     public boolean checkPath(Square[][] squareArray, int dirX, int dirY,
             int srcX, int srcY, int destX, int destY) {
 
+        
         while (destY != srcY + dirY || destX != srcX + dirX) {
             srcY = srcY + dirY;
             srcX = srcX + dirX;
-
+            
+            // Check board below
+            int levelCheck = srcX - 8;
+            
+            
+            
+            
+            
             try {
-                if (squareArray[srcX][srcY].getPiece() != null) {
+                
+                if (srcX >= 8 && srcX <= 15) {
+                    // For Level 2 board destination
+                    // check level 1
+                    if ((squareArray[srcX - 8][srcY].getPiece() != null) 
+                            //check level 3
+                            || (squareArray[srcX + 8][srcY].getPiece() != null)) {
+                        return false;
+                    }
+                } else if (srcX >= 16 && srcX <= 23){
+                    // For Level 2 board destination
+                    // check level 1
+                    if ((squareArray[srcX - 16][srcY].getPiece() != null)
+                            // check level 2
+                            || (squareArray[srcX - 16][srcY].getPiece() != null)) {
+                        return false;
+                    }
+                }
+                
+                if ((squareArray[srcX][srcY].getPiece() != null)) {
                     return false;
                 }
+
             } catch (Exception e) {
-                System.out.println("Can't do that");
-                return false;
+                System.out.println(e.getMessage());
+                return true;
             }
         }
         

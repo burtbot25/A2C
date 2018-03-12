@@ -24,6 +24,8 @@ public class Queen extends ChessPiece {
      */
     private String name = "Queen";
     
+    private int checkX = 0;
+    
     /**
      * Constructs an object of type Queen.
      * @param colour of Queen
@@ -74,46 +76,67 @@ public class Queen extends ChessPiece {
     boolean validMove(Square[][] squareArray, int fromX, int fromY,
             int toX, int toY) {
         
+
         // Diagonal Movements
         // Up-left
         if (fromX - toX > 0 && fromX - toX == fromY - toY) {
-            //return checkPath(squareArray, -1, -1, fromX, fromY, toX, toY);
+            return checkPath(squareArray, -1, -1, fromX, fromY, toX, toY);
         }
         
         // Up-right
         if (fromX - toX < 0 && fromX - toX == (fromY - toY) * -1) {
-            //return checkPath(squareArray, 1, -1, fromX, fromY, toX, toY);
+            return checkPath(squareArray, 1, -1, fromX, fromY, toX, toY);
         }
         
         // Down-left
         if (fromX - toX > 0 && fromX - toX == (fromY - toY) * -1) {
-            //return checkPath(squareArray, -1, 1, fromX, fromY, toX, toY);
+            return checkPath(squareArray, -1, 1, fromX, fromY, toX, toY);
         }
         
         // Down-right
         if (fromX - toX < 0 && fromX - toX == fromY - toY) {
-            //return checkPath(squareArray, 1, 1, fromX, fromY, toX, toY);
+            return checkPath(squareArray, 1, 1, fromX, fromY, toX, toY);
         }
         
+        // This is where you need to calculate if the toX - 8, the conditional will change accordingly
+        
+        levelCheckerX(fromX, toX);
         // Vertical
-        if (toX == fromX) {
+        if (fromX == checkX) {
             
-//            if (fromY > toY) {
-//                return checkPath(squareArray, 0, -1, fromX, fromY, toX, toY);
-//            } else {
-//                return checkPath(squareArray, 0, 1, fromX, fromY, toX, toY);
-//            }
+            if (fromY > toY) {
+                return checkPath(squareArray, 0, -1, fromX, fromY, checkX, toY);
+            } else {
+                return checkPath(squareArray, 0, 1, fromX, fromY, checkX, toY);
+            }
         } 
+        
+        //levelCheckerY(fromY, toY);
+        
         // Horizontal
-        if (toY == fromY) {
-//            if (fromX > toX) {
-//                return checkPath(squareArray, -1, 0, fromX, fromY, toX, toY);
-//            } else {
-//                return checkPath(squareArray, 1, 0, fromX, fromY, toX, toY);
-//            }
+        if (toY == fromY || (fromY == toY + 8) || (fromY == toY - 8) || (fromY == toY + 16) || (fromY == toY - 16)) {
+            if (fromX > toX) {
+                return checkPath(squareArray, -1, 0, fromX, fromY, toX, toY);
+            } else {
+                return checkPath(squareArray, 1, 0, fromX, fromY, toX, toY);
+            }
         }
-        return true;
+        return false;
         
     }
 
+    public void levelCheckerX(int fromX, int toX) {
+        if ((fromX == toX + 8)) {
+            checkX = toX + 8;
+        } else if ((fromX == toX - 8)) {
+            checkX = toX - 8;
+        } else if ((fromX == toX + 16)) {
+            checkX = toX + 16;
+        } else if ((fromX == toX - 16)) {
+            checkX = toX - 16;
+        } else {
+            checkX = toX;
+        }
+    }
+    
 }
