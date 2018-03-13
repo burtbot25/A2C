@@ -198,13 +198,6 @@ abstract class ChessPiece extends Text implements Serializable {
             srcY = srcY + dirY;
             srcX = srcX + dirX;
             
-            // Check board below
-            int levelCheck = srcX - 8;
-            
-            
-            
-            
-            
             try {
                 
                 if (srcX >= 8 && srcX <= 15) {

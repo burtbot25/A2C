@@ -76,6 +76,31 @@ public class Queen extends ChessPiece {
     boolean validMove(Square[][] squareArray, int fromX, int fromY,
             int toX, int toY) {
         
+        //move from level 1 to 2
+        if (toX >= 8 && toX <= 15 && fromX >= 0 && fromX <=7) {
+            toX = toX - 8;
+        }
+        //move from level 1 to 3
+        if (toX >= 16 && toX <= 23 && fromX >= 0 && fromX <=7) {
+            toX = toX - 16;
+        }
+        //move from level 2 to 1
+        if (toX >= 0 && toX <= 7 && fromX >= 8 && fromX <=15) {
+            toX = toX + 8;
+        }
+        //move from level 2 to 3
+        if (toX >= 16 && toX <= 23 && fromX >= 8 && fromX <=15) {
+            toX = toX - 8;
+        }
+        
+        //move from level 3 to 1
+        if (toX >= 0 && toX <= 7 && fromX >= 16 && fromX <=23) {
+            toX = toX + 16;
+        }
+        //move from level 3 to 2
+        if (toX >= 8 && toX <= 15 && fromX >= 16 && fromX <=23) {
+            toX = toX + 8;
+        }
 
         // Diagonal Movements
         // Up-left
@@ -138,5 +163,5 @@ public class Queen extends ChessPiece {
             checkX = toX;
         }
     }
-    
+        
 }
