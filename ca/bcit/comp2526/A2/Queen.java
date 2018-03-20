@@ -76,6 +76,19 @@ public class Queen extends ChessPiece {
     boolean validMove(Square[][] squareArray, int fromX, int fromY,
             int toX, int toY) {
         
+        // Disallows movement of two boards if moving only one space vertically 
+        if ((toX == (fromX + 16) || toX == (fromX - 16)) && Math.abs(fromY - toY) == 1) {
+            return false;
+        }
+        
+        // Disallows movement of two board if moving only one space horizontally and diagonally
+        if (((fromX >= 0 && fromX <= 7 && toX >= 16 && toX <= 23) 
+                || (toX >= 0 && toX <= 7 && fromX >= 16 && fromX <= 23)) 
+                && ((Math.abs(fromX - toX) == 17) 
+                        || Math.abs(fromX - toX) == 15)) {
+            return false;
+        }
+        
         //move from level 1 to 2
         if (toX >= 8 && toX <= 15 && fromX >= 0 && fromX <=7) {
             toX = toX - 8;
@@ -123,8 +136,6 @@ public class Queen extends ChessPiece {
             return checkPath(squareArray, 1, 1, fromX, fromY, toX, toY);
         }
         
-        // This is where you need to calculate if the toX - 8, the conditional will change accordingly
-        
         levelCheckerX(fromX, toX);
         // Vertical
         if (fromX == checkX) {
@@ -135,8 +146,6 @@ public class Queen extends ChessPiece {
                 return checkPath(squareArray, 0, 1, fromX, fromY, checkX, toY);
             }
         } 
-        
-        //levelCheckerY(fromY, toY);
         
         // Horizontal
         if (toY == fromY || (fromY == toY + 8) || (fromY == toY - 8) || (fromY == toY + 16) || (fromY == toY - 16)) {

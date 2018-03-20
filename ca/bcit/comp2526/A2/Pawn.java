@@ -85,12 +85,12 @@ public class Pawn extends ChessPiece {
             } else if (!notMoved && Math.abs(fromY - toY) == 2) {
                 return false;
             }
+            // Disallows movement of two boards if moving only one space
             if ((toX == (fromX + 16) || toX == (fromX - 16)) && Math.abs(fromY - toY) == 1) {
                 return false;
             }
             notMoved = false;
             return true;
-            
         }
         return false;
     }

@@ -12,7 +12,6 @@ public class Board3D extends Board {
     
     public void newGame() {
         setSquares(24, 8);
-        //note, makePawns not called at the moment.
         // turnCheck in getDestination info is off
         setWhitePieces();
         setBlackPieces();
